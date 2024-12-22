@@ -5,13 +5,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -48,41 +48,46 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun BusinessCard(modifier: Modifier = Modifier) {
-    Column(modifier = modifier) {
-        CreateAppHeader(
-            name = "Name",
-            title = "Title",
-            modifier = Modifier.fillMaxWidth()
-        )
-        ContactInformation(
-            number = "Number",
-            socialMedia = "Social Media",
-            email = "Email",
-            phoneIcon = Icons.Filled.Phone,
-            socialMediaIcon = Icons.Filled.AccountCircle,
-            emailIcon = Icons.Filled.Email,
-            modifier = Modifier.fillMaxWidth()
-        )
+        Column (modifier = modifier.padding(16.dp)){
+            CreateAppHeader(
+                name = "Name",
+                title = "Title",
+                modifier = Modifier.fillMaxWidth()
+            )
+            ContactInformation(
+                number = "Number",
+                socialMedia = "Social Media",
+                email = "Email",
+                phoneIcon = Icons.Filled.Phone,
+                socialMediaIcon = Icons.Filled.AccountCircle,
+                emailIcon = Icons.Filled.Email,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
     }
-}
+
 
 @Composable
 fun CreateAppHeader(name: String, title: String, modifier: Modifier){
-    Box(modifier = modifier.fillMaxWidth()) {
-        Column {
+        Column(
+            modifier = modifier.padding(16.dp),
+            horizontalAlignment = CenterHorizontally,
+        ) {
             Image(
                 painter = painterResource(id = R.drawable.android_logo),
-                contentDescription = "android logo")
+                contentDescription = "android logo",
+                modifier = Modifier.size(100.dp) // Adjust the size as needed
+            )
             Text(text = name)
             Text(text = title)
         }
 
     }
-}
+
 
 @Composable
 fun InfoRow(icon: ImageVector, contentDescription: String, text: String) {
-    Row (
+    Row(
         verticalAlignment = Alignment.CenterVertically,
     ){
         Icon(imageVector = icon, contentDescription = contentDescription)
@@ -101,10 +106,8 @@ fun ContactInformation(
     email: String,
     modifier: Modifier
 ) {
-    Box(modifier = modifier.padding(16.dp),
-        ) {
         Column(
-            modifier = modifier.fillMaxWidth(),
+            modifier = modifier.padding(16.dp),
             horizontalAlignment = CenterHorizontally,
             ) {
             InfoRow(icon = phoneIcon, contentDescription = "number",text = number)
@@ -112,7 +115,6 @@ fun ContactInformation(
             InfoRow(icon = emailIcon, contentDescription = "email", text = email)
             }
         }
-    }
 
 @Preview(showBackground = true)
 @Composable
